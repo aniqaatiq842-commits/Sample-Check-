@@ -1,0 +1,13 @@
+﻿sample_id,patient_code,sample_type,collection_date
+SC-2001,PT-701,blood,2026-11-05
+SC-2002,PT-702,serum,2026-11-05
+SC-2003,PT-703,plasma,2026-11-05
+SC-2004,,blood,2026-11-05
+SC-2005,PT-705,urine,
+SC-2006,PT-706,unknown,2026-11-06
+SC-2007,PT-707,saliva,2026-11-06
+SC-2007,PT-708,blood,2026-11-06
+,PT-709,tissue,2026-11-06
+SC-2010,PT-710,serum,2026-11-06
+SC-2011,PT-711,blood,2026-11-06
+SC-2012,,plasma,2026-11-06

@@ -1,0 +1,1452 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sample Check | Laboratory Intelligence</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css?v=101">
+
+    <style>
+        .welcome-panel {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.5fr .8fr;
+            align-items: center;
+            gap: 30px;
+            padding: 34px;
+            margin-bottom: 30px;
+            background: linear-gradient(120deg, #174F4B, #287C78);
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 12px 32px rgba(31,102,98,.16);
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-label {
+            color: #B8DFD6;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .welcome-panel h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(25px, 3vw, 34px);
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin: 13px 0 12px;
+            color: white;
+        }
+
+        .welcome-panel p {
+            color: rgba(255,255,255,.78);
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 510px;
+        }
+
+        .welcome-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 23px;
+        }
+
+        .welcome-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 17px;
+            border-radius: 9px;
+            background: white;
+            color: #205F5B;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .welcome-secondary {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 10px 5px;
+        }
+
+        .welcome-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 165px;
+        }
+
+        .welcome-orbit {
+            width: 155px;
+            height: 155px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+
+        .welcome-orbit::before,
+        .welcome-orbit::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(255,255,255,.17);
+            border-radius: 50%;
+        }
+
+        .welcome-orbit::before { inset: 15px; }
+        .welcome-orbit::after { inset: 32px; }
+
+        .welcome-core {
+            width: 65px;
+            height: 65px;
+            border-radius: 19px;
+            display: grid;
+            place-items: center;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.25);
+            font-size: 28px;
+        }
+
+        .welcome-status {
+            position: absolute;
+            right: 0;
+            bottom: 12px;
+            padding: 9px 12px;
+            border-radius: 9px;
+            background: rgba(255,255,255,.13);
+            border: 1px solid rgba(255,255,255,.2);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .dashboard-section-label {
+            margin: 30px 0 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dashboard-section-label span:first-child {
+            color: #829092;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0,1fr));
+            gap: 11px;
+            margin: 15px 0 32px;
+        }
+
+        .workflow-card {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            padding: 15px 13px;
+            border: 1px solid #E6ECE9;
+            border-radius: 12px;
+            background: white;
+            text-decoration: none;
+            transition: .2s ease;
+        }
+
+        .workflow-card:hover {
+            transform: translateY(-3px);
+            border-color: #C8DED6;
+        }
+
+        .workflow-number {
+            color: #287C78;
+            font-family: 'Manrope', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .workflow-card strong {
+            font-size: 11px;
+            line-height: 1.5;
+            color: #263B3D;
+        }
+
+        .workflow-card small {
+            color: #899795;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .overview-heading {
+            margin-bottom: 16px;
+        }
+
+        .overview-heading h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            margin: 5px 0;
+        }
+
+        .overview-heading p,
+        .section-heading p {
+            color: #829092;
+            font-size: 12px;
+        }
+
+        .section-heading {
+            padding-bottom: 4px;
+        }
+
+        .section-heading h2 {
+            font-size: 20px;
+        }
+
+        .section-heading p {
+            max-width: 620px;
+            line-height: 1.7;
+        }
+
+        .section-number {
+            flex-shrink: 0;
+            width: 37px;
+            height: 37px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: #E7F2EF;
+            color: #287C78;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .section-title-group {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .dashboard-divider {
+            border: 0;
+            height: 1px;
+            background: #E6ECE9;
+            margin: 30px 0;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* PRIMARY SINGLE-FILE UPLOAD */
+
+        .primary-inspection-panel {
+            border: 1px solid #DCEBE5;
+            border-radius: 15px;
+            background: white;
+            padding: 22px;
+        }
+
+        /* BUILT-IN DEMO DATA */
+
+        .inspection-demo-panel {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 18px;
+            margin-bottom: 18px;
+            border: 1px solid #DCEBE5;
+            border-radius: 12px;
+            background: #F2F8F5;
+        }
+
+        .inspection-demo-panel h3 {
+            margin: 0 0 6px;
+            color: #263B3D;
+            font-size: 14px;
+        }
+
+        .inspection-demo-panel p {
+            margin: 0;
+            color: #829092;
+            font-size: 11px;
+            line-height: 1.6;
+            max-width: 470px;
+        }
+
+        .inspection-demo-panel .inspection-primary-btn {
+            white-space: nowrap;
+        }
+
+        .inspection-upload {
+            border: 1px dashed #B9D4CA;
+            border-radius: 13px;
+            background: #F8FBF9;
+            padding: 27px;
+            text-align: center;
+        }
+
+        .inspection-upload-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 13px;
+            border-radius: 14px;
+            background: #E5F2ED;
+            color: #287C78;
+            font-size: 22px;
+        }
+
+        .inspection-upload h3 {
+            margin: 0 0 7px;
+            color: #263B3D;
+            font-size: 15px;
+        }
+
+        .inspection-upload p {
+            max-width: 470px;
+            margin: 0 auto 17px;
+            color: #829092;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .inspection-upload input[type="file"] {
+            display: none;
+        }
+
+        .inspection-file-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 17px;
+            border-radius: 8px;
+            background: #E7F2EF;
+            color: #205F5B;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .inspection-file-name {
+            display: block;
+            margin-top: 11px;
+            color: #829092;
+            font-size: 11px;
+        }
+
+        .inspection-action-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 13px;
+            margin-top: 19px;
+        }
+
+        .inspection-primary-btn {
+            border: 0;
+            border-radius: 9px;
+            background: #287C78;
+            color: white;
+            padding: 13px 19px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .inspection-primary-btn:hover {
+            background: #205F5B;
+        }
+
+        .inspection-primary-btn:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .inspection-note {
+            margin-top: 15px;
+            padding: 12px 14px;
+            border-radius: 9px;
+            background: #F5F8F6;
+            color: #71817D;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .results-area {
+            margin-top: 23px;
+        }
+
+        .result-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin: 13px 0 18px;
+        }
+
+        .result-chip {
+            display: inline-flex;
+            padding: 8px 11px;
+            border: 1px solid #E2EBE6;
+            border-radius: 8px;
+            background: #F7FAF8;
+            color: #526361;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .optional-label {
+            display: inline-block;
+            margin-left: 7px;
+            padding: 4px 8px;
+            border-radius: 20px;
+            background: #F0F2F1;
+            color: #647477;
+            font-size: 10px;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+
+        /* CUSTOMER IDENTITY */
+
+        .customer-panel {
+            border: 1px solid #E6ECE9;
+            background: #F8FAF9;
+            border-radius: 13px;
+            padding: 19px;
+            margin-bottom: 20px;
+        }
+
+        .customer-panel h3 {
+            margin: 0 0 5px;
+            font-size: 15px;
+        }
+
+        .customer-panel > p {
+            color: #829092;
+            font-size: 12px;
+            margin: 0 0 15px;
+            line-height: 1.6;
+        }
+
+        .customer-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .customer-field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .customer-field label {
+            color: #526361;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .customer-field input {
+            width: 100%;
+            min-height: 42px;
+            padding: 10px 12px;
+            border: 1px solid #DCE5E1;
+            border-radius: 8px;
+            background: white;
+            color: #24343A;
+            font: inherit;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .customer-field input:focus {
+            border-color: #287C78;
+            box-shadow: 0 0 0 3px rgba(40,124,120,.10);
+        }
+
+        .customer-history-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .customer-history-btn {
+            border: 1px solid #C8DED6;
+            background: white;
+            color: #205F5B;
+            padding: 9px 13px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .customer-history-btn:hover {
+            background: #EAF4F0;
+        }
+
+        .customer-history-hint {
+            color: #829092;
+            font-size: 11px;
+        }
+
+        /* HISTORY INTELLIGENCE */
+
+        .intelligence-item {
+            border: 1px solid #E7ECE9;
+            border-radius: 10px;
+            padding: 14px;
+            background: white;
+            margin-bottom: 10px;
+        }
+
+        .intelligence-item-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .intelligence-meta {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            color: #647477;
+            font-size: 13px;
+        }
+
+        .repeat-label {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 4px 8px;
+            background: #FFF3DF;
+            color: #94621B;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .checklist-item {
+            display: flex;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px solid #E7ECE9;
+        }
+
+        .checklist-number {
+            min-width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            background: #E6F2EF;
+            color: #287C78;
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .checklist-item p {
+            margin: 5px 0;
+            color: #647477;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .intelligence-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .intelligence-header h3 {
+            margin: 0 0 5px;
+        }
+
+        .intelligence-header p {
+            margin: 0;
+            color: #647477;
+            font-size: 12px;
+        }
+
+        .history-label {
+            background: #E6F2EF;
+            color: #287C78;
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .intelligence-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(130px,1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .intelligence-stat {
+            background: #F7F9F7;
+            border: 1px solid #E7ECE9;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .intelligence-stat span {
+            display: block;
+            font-size: 12px;
+            color: #647477;
+        }
+
+        .intelligence-stat strong {
+            display: block;
+            font-size: 25px;
+            color: #24343A;
+            margin-top: 5px;
+        }
+
+        .intelligence-section {
+            margin-bottom: 25px;
+        }
+
+        .intelligence-section h3 {
+            margin-bottom: 12px;
+        }
+
+        .intelligence-section > p {
+            color: #647477;
+            font-size: 13px;
+        }
+
+        .checklist-panel {
+            background: #F7F9F7;
+            border: 1px solid #E7ECE9;
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        /* SMALL SCREEN */
+
+        @media (max-width: 1050px) {
+            .workflow-grid {
+                grid-template-columns: repeat(3,minmax(0,1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .welcome-panel {
+                grid-template-columns: 1fr;
+                padding: 25px;
+            }
+
+            .welcome-visual {
+                display: none;
+            }
+
+            .workflow-grid {
+                grid-template-columns: repeat(2,minmax(0,1fr));
+            }
+
+            .welcome-panel h2 {
+                font-size: 26px;
+            }
+
+            .customer-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .inspection-demo-panel {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .workflow-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .welcome-panel {
+                padding: 20px;
+            }
+
+            .inspection-upload {
+                padding: 20px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+        <a class="brand" href="#overview">
+            <span class="brand-mark">S</span>
+            <span>Sample<span class="brand-light">Check</span></span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+
+        <nav class="navigation">
+            <a href="#overview" class="nav-link active">◫ &nbsp; Overview</a>
+            <a href="#inspection" class="nav-link">▤ &nbsp; Sample Inspection</a>
+            <a href="#staffReview" class="nav-link">☑ &nbsp; Staff Review</a>
+            <a href="#investigation" class="nav-link">✦ &nbsp; AI Investigation</a>
+            <a href="#clarification" class="nav-link">✉ &nbsp; Clarification</a>
+            <a href="#intelligence" class="nav-link">◈ &nbsp; Error Intelligence</a>
+            <a href="#readiness" class="nav-link">◉ &nbsp; Batch Readiness</a>
+            <a href="#reconciliation" class="nav-link">⇄ &nbsp; Optional Reconciliation</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <span class="status-dot"></span>
+            <span>System operational</span>
+        </div>
+    </aside>
+
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+            <div>
+                <div class="eyebrow">LABORATORY OPERATIONS / WORKSPACE</div>
+                <h1>Sample Intelligence</h1>
+                <p>Inspect incoming sample records and review administrative exceptions before testing.</p>
+            </div>
+
+            <div class="topbar-tag">SAMPLE INTAKE WORKSPACE</div>
+        </header>
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome-panel">
+            <div class="welcome-content">
+                <span class="welcome-label">LABORATORY INTELLIGENCE PLATFORM</span>
+
+                <h2>Better sample intake.<br>Fewer preventable errors.</h2>
+
+                <p>
+                    Inspect incoming sample records, identify missing or
+                    incorrect administrative information, and help staff
+                    resolve issues before laboratory testing proceeds.
+                </p>
+
+                <div class="welcome-actions">
+                    <a href="#inspection" class="welcome-button">
+                        + Inspect a sample file
+                    </a>
+
+                    <a href="#investigation" class="welcome-secondary">
+                        Explore AI investigation →
+                    </a>
+                </div>
+            </div>
+
+            <div class="welcome-visual">
+                <div class="welcome-orbit">
+                    <div class="welcome-core">✦</div>
+                    <div class="welcome-status">
+                        <span class="status-dot"></span>
+                        Intelligence active
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- OVERVIEW -->
+
+        <section id="overview" class="section">
+            <div class="overview-heading">
+                <div class="eyebrow">WORKSPACE OVERVIEW</div>
+                <h2>Intake at a glance</h2>
+                <p>A summary of the latest inspected samples and their staff-review status.</p>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span class="stat-label">TOTAL SAMPLES</span>
+                    <strong id="totalSamples">{{ stats.total_samples }}</strong>
+                    <span class="stat-note">Samples inspected</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">TOTAL EXCEPTIONS</span>
+                    <strong id="totalFindings">{{ stats.total_findings }}</strong>
+                    <span class="stat-note">Issues identified</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">OPEN EXCEPTIONS</span>
+                    <strong id="openFindings">{{ stats.open_findings }}</strong>
+                    <span class="stat-note">Awaiting staff review</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">RESOLVED</span>
+                    <strong id="resolvedFindings">{{ stats.resolved_findings }}</strong>
+                    <span class="stat-note">Staff-confirmed resolutions</span>
+                </article>
+            </div>
+        </section>
+
+
+        <!-- WORKFLOW -->
+
+        <div class="dashboard-section-label">
+            <span>YOUR WORKFLOW</span>
+            <span class="muted-text">Five integrated capabilities</span>
+        </div>
+
+        <div class="workflow-grid">
+            <a href="#inspection" class="workflow-card">
+                <span class="workflow-number">01 / INSPECT</span>
+                <strong>Sample inspection</strong>
+                <small>Check one incoming CSV file</small>
+            </a>
+
+            <a href="#investigation" class="workflow-card">
+                <span class="workflow-number">02 / ANALYZE</span>
+                <strong>AI investigation</strong>
+                <small>Understand detected exceptions</small>
+            </a>
+
+            <a href="#clarification" class="workflow-card">
+                <span class="workflow-number">03 / COMMUNICATE</span>
+                <strong>Clarification workflow</strong>
+                <small>Prepare customer messages</small>
+            </a>
+
+            <a href="#intelligence" class="workflow-card">
+                <span class="workflow-number">04 / LEARN</span>
+                <strong>Error intelligence</strong>
+                <small>Identify recurring problems</small>
+            </a>
+
+            <a href="#readiness" class="workflow-card">
+                <span class="workflow-number">05 / REVIEW</span>
+                <strong>Batch readiness</strong>
+                <small>Review administrative completeness</small>
+            </a>
+        </div>
+
+
+        <hr class="dashboard-divider">
+
+
+        <!-- 01 PRIMARY SINGLE-FILE INSPECTION -->
+
+        <section id="inspection" class="section">
+            <div class="section-heading">
+                <div class="section-title-group">
+                    <span class="section-number">01</span>
+
+                    <div>
+                        <div class="eyebrow">PRIMARY WORKFLOW / INTAKE VALIDATION</div>
+                        <h2>Single-file sample inspection</h2>
+
+                        <p>
+                            Upload one incoming CSV file. Sample Check will
+                            inspect individual records for missing sample IDs,
+                            duplicate IDs, missing information, and
+                            unrecognized sample types.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="primary-inspection-panel">
+
+                <!-- BUILT-IN DEMO DATA -->
+
+                <div class="inspection-demo-panel">
+                    <div>
+                        <h3>Try Sample Check with Demo Data</h3>
+                        <p>
+                            New here? Load a prepared sample dataset automatically
+                            and explore how Sample Check detects administrative errors.
+                            This dataset contains synthetic examples, not real patient data.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="loadDemoBtn"
+                        class="inspection-primary-btn"
+                    >
+                        Load Demo Data →
+                    </button>
+
+                    <span id="demoMessage" class="message"></span>
+                </div>
+
+
+                <!-- NORMAL CSV UPLOAD -->
+
+                <div class="inspection-upload">
+                    <div class="inspection-upload-icon">▤</div>
+
+                    <h3>Upload your own sample records</h3>
+
+                    <p>
+                        Select the CSV file received by your laboratory.
+                        You do not need a second file to run this inspection.
+                    </p>
+
+                    <input
+                        type="file"
+                        id="inspectionFile"
+                        accept=".csv"
+                    >
+
+                    <label
+                        for="inspectionFile"
+                        class="inspection-file-label"
+                    >
+                        Choose sample CSV
+                    </label>
+
+                    <span id="inspectionFileName" class="inspection-file-name">
+                        No file selected
+                    </span>
+                </div>
+
+                <div class="inspection-action-row">
+                    <button
+                        type="button"
+                        id="inspectBtn"
+                        class="inspection-primary-btn"
+                        disabled
+                    >
+                        Inspect samples →
+                    </button>
+
+                    <span id="inspectMessage" class="message"></span>
+                </div>
+
+                <div class="inspection-note">
+                    <strong>Administrative validation only:</strong>
+                    Sample Check identifies data-entry and sample-information
+                    issues. It does not perform clinical testing, diagnose
+                    disease, or approve laboratory quality control.
+                </div>
+
+                <div id="inspectionResults" class="results-area" hidden>
+                    <h3>Sample inspection results</h3>
+
+                    <p class="muted-text">
+                        Findings from the uploaded sample file.
+                    </p>
+
+                    <div id="inspectionSummary" class="result-summary"></div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sample ID</th>
+                                    <th>Issue</th>
+                                    <th>Description</th>
+                                    <th>Severity</th>
+                                    <th>CSV Row</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="inspectionBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- STAFF REVIEW -->
+
+        <section id="staffReview" class="section">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">STAFF REVIEW</div>
+                    <h2>Sample inspection exceptions</h2>
+
+                    <p>
+                        Review findings from the latest single-file inspection
+                        and record staff-confirmed resolutions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="panel table-panel">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sample ID</th>
+                                <th>Issue</th>
+                                <th>Description</th>
+                                <th>Severity</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="findingsBody">
+                            {% for finding in findings %}
+                            <tr>
+                                <td>{{ finding.sample_id }}</td>
+                                <td>{{ finding.issue_type }}</td>
+                                <td>{{ finding.description }}</td>
+                                <td>
+                                    <span class="severity {{ finding.severity|lower }}">
+                                        {{ finding.severity }}
+                                    </span>
+                                </td>
+                                <td>{{ finding.status }}</td>
+                                <td>
+                                    {% if finding.status == "Open" %}
+                                    <button
+                                        class="resolve-btn"
+                                        data-finding-id="{{ finding.id }}"
+                                    >
+                                        Resolve
+                                    </button>
+                                    {% else %}
+                                    <span class="done">Resolved</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="empty">
+                                    No exceptions detected.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- AI INVESTIGATION -->
+
+        <section id="investigation" class="section">
+            <div class="section-heading">
+                <div class="section-title-group">
+                    <span class="section-number">02</span>
+
+                    <div>
+                        <div class="eyebrow">AI-POWERED ANALYSIS</div>
+                        <h2>AI investigation</h2>
+
+                        <p>
+                            Understand the inspection findings, prioritize
+                            administrative issues, and receive suggested
+                            next steps.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-panel">
+                <div>
+                    <span class="ai-label">✦ &nbsp; POWERED BY VULTR INFERENCE</span>
+
+                    <h3>Investigate sample exceptions</h3>
+
+                    <p>
+                        AI reviews the latest single-file inspection findings
+                        and prepares explanations and recommendations.
+                    </p>
+
+                    <span id="aiStatus" class="message"></span>
+                </div>
+
+                <button id="aiAnalyzeBtn" class="ai-btn">
+                    ✦ Investigate with AI
+                </button>
+            </div>
+
+            <div id="aiResults" class="panel results-area" hidden>
+                <h3>AI investigation report</h3>
+
+                <div id="aiSummary"></div>
+
+                <h4>Priority actions</h4>
+                <ul id="aiActions"></ul>
+
+                <h4>Suggested customer message</h4>
+                <div id="aiCustomerMessage" class="customer-message"></div>
+
+                <p id="aiLimitations" class="muted-text"></p>
+            </div>
+        </section>
+
+
+        <!-- CLARIFICATION -->
+
+        <section id="clarification" class="section">
+            <div class="section-heading">
+                <div class="section-title-group">
+                    <span class="section-number">03</span>
+
+                    <div>
+                        <div class="eyebrow">CUSTOMER COMMUNICATION</div>
+                        <h2>Clarification workflow</h2>
+
+                        <p>
+                            Prepare clear messages to request missing or
+                            corrected sample information.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <p class="muted-text">
+                    Messages generated during AI investigation appear here
+                    for staff review. Staff must approve them before sending.
+                </p>
+
+                <div id="clarificationContent" class="clarification-content">
+                    No clarification draft generated yet.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ERROR INTELLIGENCE -->
+
+        <section id="intelligence" class="section">
+            <div class="section-heading">
+                <div class="section-title-group">
+                    <span class="section-number">04</span>
+
+                    <div>
+                        <div class="eyebrow">HISTORICAL PATTERN ANALYSIS</div>
+                        <h2>Repeat error intelligence</h2>
+
+                        <p>
+                            Identify recurring submission errors and prepare
+                            prevention guidance using customer submission history.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div id="errorIntelligence">
+                    <p class="muted-text">
+                        Historical error patterns will appear as submission
+                        records accumulate. Use optional reconciliation
+                        to record customer submission history.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- READINESS -->
+
+        <section id="readiness" class="section">
+            <div class="section-heading">
+                <div class="section-title-group">
+                    <span class="section-number">05</span>
+
+                    <div>
+                        <div class="eyebrow">ADMINISTRATIVE BATCH REVIEW</div>
+                        <h2>Batch readiness</h2>
+
+                        <p>
+                            An illustrative administrative completeness
+                            assessment based on single-file inspection findings.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel readiness-panel">
+                <div>
+                    <span class="stat-label">CURRENT READINESS</span>
+
+                    <strong id="readinessScore">—</strong>
+
+                    <p id="readinessExplanation" class="muted-text">
+                        Inspect a sample file to calculate the administrative
+                        readiness score.
+                    </p>
+                </div>
+
+                <div class="readiness-track">
+                    <div id="readinessBar" class="readiness-fill"></div>
+                </div>
+            </div>
+
+            <p class="muted-text">
+                This score is illustrative. It is not clinical clearance,
+                sample suitability confirmation, or laboratory QC approval.
+            </p>
+        </section>
+
+
+        <hr class="dashboard-divider">
+
+
+        <!-- OPTIONAL RECONCILIATION -->
+
+        <section id="reconciliation" class="section">
+            <div class="section-heading">
+                <div class="section-title-group">
+                    <span class="section-number">+</span>
+
+                    <div>
+                        <div class="eyebrow">OPTIONAL ADVANCED TOOL</div>
+
+                        <h2>
+                            Cross-file reconciliation
+                            <span class="optional-label">OPTIONAL</span>
+                        </h2>
+
+                        <p>
+                            When two files are available, compare customer
+                            orders with laboratory manifests to identify
+                            missing records, unexpected samples, and
+                            metadata conflicts. This is separate from
+                            the primary single-file inspection.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+
+                <!-- CUSTOMER IDENTITY -->
+
+                <div class="customer-panel">
+                    <h3>Customer identity</h3>
+
+                    <p>
+                        Select the customer associated with this reconciliation.
+                        Its submission history and recurring errors are
+                        kept separate.
+                    </p>
+
+                    <div class="customer-fields">
+                        <div class="customer-field">
+                            <label for="customerCode">Customer code</label>
+
+                            <input
+                                type="text"
+                                id="customerCode"
+                                maxlength="100"
+                                autocomplete="off"
+                                placeholder="Enter customer code"
+                            >
+                        </div>
+
+                        <div class="customer-field">
+                            <label for="customerName">Customer / laboratory name</label>
+
+                            <input
+                                type="text"
+                                id="customerName"
+                                maxlength="150"
+                                autocomplete="organization"
+                                placeholder="Enter laboratory name"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="customer-history-row">
+                        <button
+                            type="button"
+                            id="loadCustomerHistoryBtn"
+                            class="customer-history-btn"
+                        >
+                            Load customer history
+                        </button>
+
+                        <span class="customer-history-hint">
+                            Load this customer's previous reconciliation submissions.
+                        </span>
+                    </div>
+
+                    <span id="customerMessage" class="message"></span>
+                </div>
+
+
+                <!-- TWO FILES -->
+
+                <div class="upload-grid">
+                    <div class="upload-box">
+                        <div class="upload-icon">01</div>
+
+                        <h3>Customer order</h3>
+
+                        <p>
+                            Upload the sample information received
+                            from your customer.
+                        </p>
+
+                        <input
+                            type="file"
+                            id="customerOrderFile"
+                            accept=".csv"
+                        >
+
+                        <label
+                            for="customerOrderFile"
+                            class="file-label"
+                        >
+                            Choose CSV file
+                        </label>
+
+                        <span id="customerOrderName" class="file-name">
+                            No file selected
+                        </span>
+                    </div>
+
+                    <div class="upload-box">
+                        <div class="upload-icon">02</div>
+
+                        <h3>Laboratory manifest</h3>
+
+                        <p>
+                            Upload the sample records prepared
+                            by your laboratory.
+                        </p>
+
+                        <input
+                            type="file"
+                            id="labManifestFile"
+                            accept=".csv"
+                        >
+
+                        <label
+                            for="labManifestFile"
+                            class="file-label"
+                        >
+                            Choose CSV file
+                        </label>
+
+                        <span id="labManifestName" class="file-name">
+                            No file selected
+                        </span>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <button
+                        id="reconcileBtn"
+                        class="primary-btn"
+                        disabled
+                    >
+                        Run optional reconciliation →
+                    </button>
+
+                    <span id="reconcileMessage" class="message"></span>
+                </div>
+
+
+                <!-- RECONCILIATION RESULTS -->
+
+                <div
+                    id="reconciliationResults"
+                    class="results-area"
+                    hidden
+                >
+                    <h3>Reconciliation results</h3>
+
+                    <div
+                        id="reconciliationSummary"
+                        class="result-summary"
+                    ></div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sample ID</th>
+                                    <th>Exception</th>
+                                    <th>Description</th>
+                                    <th>Severity</th>
+                                    <th>Evidence</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="reconciliationBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+            <span>
+                Sample Check · AI-assisted pre-accession exception review
+            </span>
+
+            <span class="footer-status">
+                <span class="status-dot"></span>
+                System operational
+            </span>
+        </footer>
+
+    </main>
+</div>
+
+<script src="/static/js/app.js?v=102"></script>
+
+</body>
+</html>
