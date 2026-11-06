@@ -107,15 +107,6 @@ pip install -r requirements.txt
 
 4. Create a `.env` file in the project root and configure:
 
-```env
-VULTR_API_KEY=your_api_key
-VULTR_BASE_URL=https://api.vultrinference.com/v1
-VULTR_MODEL=deepseek-v4.1-flash-1017
-COOKIE_SECURE=false
-ALLOWED_ORIGINS=http://127.0.0.1:8000,http://localhost:8000
-```
-
-Never publish your API key or `.env` file.
 
 5. Start the application:
 
